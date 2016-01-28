@@ -55,10 +55,9 @@ public class AddActivity extends AppCompatActivity{
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_FINE_LOCATION);
             }
+        }else {
+            setLocationField();
         }
-
-        setLocationField();
-
     }
 
     @Override
