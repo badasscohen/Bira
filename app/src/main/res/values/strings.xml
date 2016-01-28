@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Bira</string>
     <string name="action_settings">Settings</string>
+    <string name="lorem">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nisi risus, maximus quis vehicula in, scelerisque in nunc. Nunc volutpat ante in libero convallis, vel placerat odio auctor. Ut a tortor felis. Vestibulum vehicula justo dolor. Praesent volutpat blandit finibus. Nunc ligula felis, volutpat et congue at, suscipit aliquet neque. In fermentum dolor quis nunc scelerisque, at pretium elit fringilla. Vivamus eget lorem quis lorem scelerisque posuere. Sed at commodo odio. In vitae sem lacinia massa pellentesque tempus.
+
+Nulla lorem lacus, bibendum quis pretium et, laoreet at nibh. Ut vel rhoncus dolor. Vestibulum sem mi, pretium mollis ullamcorper ut, semper in quam. Integer interdum, diam sit amet faucibus varius, odio nisl viverra est, ac ultrices mauris mauris vel sapien. Sed ultrices nulla non justo luctus, vitae dapibus urna blandit. Sed quis facilisis velit. Maecenas vitae nibh nec ligula fermentum feugiat vel id dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu consequat tortor.
+
+Nulla suscipit porta nulla, sit amet vulputate metus posuere id. Pellentesque ut turpis justo. Donec sed eleifend enim. Mauris quis ipsum urna. Aliquam porta nisl eget arcu fermentum imperdiet. Proin sollicitudin felis nec malesuada accumsan. Etiam id tellus vel erat dapibus volutpat. Nullam tincidunt turpis vitae diam egestas fermentum.
+
+Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam consequat metus at sem porttitor, a lobortis metus hendrerit. Nullam nec neque vehicula mauris congue fringilla non eget nulla. Sed eros tellus, ultricies eu enim eget, tempus mattis felis. Maecenas in diam nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent sagittis orci est, et sodales eros ultrices a. In hac habitasse platea dictumst. Proin vitae velit lacus. Suspendisse potenti. Curabitur sed semper ante. Sed nulla ex, tempus in mollis eget, laoreet vel ante. Curabitur erat massa, mollis elementum elementum et, gravida sit amet augue.
+
+Aliquam varius feugiat condimentum. Nam dignissim augue in euismod pharetra. Duis elit quam, iaculis ut nibh nec, congue fringilla ex. In sed aliquam enim. In hendrerit blandit varius. In sit amet nulla convallis, molestie velit a, lacinia massa. Proin ex turpis, ultrices ut ipsum nec, pretium imperdiet orci. Nullam quis rhoncus urna. Duis eu maximus dui. Cras tincidunt, nisi quis sollicitudin pretium, ligula turpis venenatis velit, id molestie urna massa sollicitudin mi. Aliquam arcu purus, mattis nec neque vitae, lobortis interdum urna. Maecenas quis augue id tortor faucibus vulputate. Etiam sit amet orci fermentum, hendrerit massa ac, iaculis mauris. Suspendisse lacinia, nisl a dignissim lobortis, nisi nunc pulvinar ex, a egestas felis risus vitae augue.
+    </string>
 </resources>
