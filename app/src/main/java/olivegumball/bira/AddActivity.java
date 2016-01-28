@@ -4,6 +4,8 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,9 +15,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by ariel on 1/28/16.
@@ -91,7 +98,7 @@ public class AddActivity extends AppCompatActivity{
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
-                location_textview.setText(location.toString());
+                location_textview.setText(getAddressForLocation(location));
 
             }
 
@@ -106,5 +113,36 @@ public class AddActivity extends AppCompatActivity{
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
+    public String getAddressForLocation(Location location) {
+
+        if (location == null) {
+            return null;
+        }
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+        int maxResults = 1;
+
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+        } catch(IOException ioe) {
+            addresses = null;
+        }
+
+        String knownName = addresses.get(0).getFeatureName();
+        if (knownName == null) {
+            String address = addresses.get(0).getAddressLine(0);
+            return address;
+        }
+        else{
+            return knownName;
+        }
+
+
+    }
 }
 
