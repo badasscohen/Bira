@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="olivegumball.bira">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +26,5 @@
             android:label="@string/add_title"
             android:parentActivityName=".MainActivity" >
         </activity>
-
     </application>
-
 </manifest>
