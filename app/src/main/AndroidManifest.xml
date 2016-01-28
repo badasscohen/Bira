@@ -26,5 +26,9 @@
             android:label="@string/add_title"
             android:parentActivityName=".MainActivity" >
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings_title">
+        </activity>
     </application>
 </manifest>

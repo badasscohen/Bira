@@ -2,5 +2,6 @@
     <string name="app_name">בירה</string>
     <string name="action_settings">הגדרות</string>
     <string name="add_title">הוספה</string>
+    <string name="settings_title">הגדרות</string>
     <string name="add_description">אתה נמצא כרגע ב:</string>
 </resources>
