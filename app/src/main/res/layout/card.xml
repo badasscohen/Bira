@@ -52,7 +52,8 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textSize="18sp"/>
+                    android:gravity="center_horizontal"
+                    android:textSize="26sp"/>
 
                 <TextView
                     android:id="@+id/card_distance"
@@ -60,7 +61,8 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textSize="18sp"/>
+                    android:gravity="center_horizontal"
+                    android:textSize="26sp"/>
 
             </LinearLayout>
         </LinearLayout>
