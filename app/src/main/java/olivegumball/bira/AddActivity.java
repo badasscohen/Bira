@@ -3,6 +3,7 @@ package olivegumball.bira;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -11,16 +12,32 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,6 +48,9 @@ public class AddActivity extends AppCompatActivity{
 
     private final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 5;
     private TextView location_textview;
+    private EditText beer_price;
+    private EditText beer_name;
+    private Location loc = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +62,39 @@ public class AddActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        beer_price = (EditText) findViewById(R.id.beer_price);
+        beer_name = (EditText) findViewById(R.id.beer_name);
         location_textview = (TextView) findViewById(R.id.location_field);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
+                String url = "http://46.101.189.104/insert.php?beer="+beer_name.getText()+"&price="
+                        +beer_price.getText()+"&lat="+loc.getLatitude()+"&long="+loc.getLongitude();
+
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                // Display the first 500 characters of the response string.
+                                //SUCCESS!
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //SHIT
+                    }
+                });
+// Add the request to the RequestQueue.
+                queue.add(stringRequest);
+
+                AddActivity.this.finish();
+            }
+        });
+
+
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -98,6 +150,7 @@ public class AddActivity extends AppCompatActivity{
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
+                loc = location;
                 location_textview.setText(getAddressForLocation(location));
 
             }
@@ -141,6 +194,7 @@ public class AddActivity extends AppCompatActivity{
         else{
             return knownName;
         }
+
 
 
     }
