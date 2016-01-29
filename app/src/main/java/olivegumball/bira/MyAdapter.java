@@ -1,5 +1,7 @@
 package olivegumball.bira;
 
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +11,13 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ContactViewHolder> {
 
+    private Typeface alef;
+
     private List<CardInfo> cardList;
 
-    public MyAdapter(List<CardInfo> cardList) {
+    public MyAdapter(List<CardInfo> cardList, AssetManager manager) {
         this.cardList = cardList;
+        alef = Typeface.createFromAsset(manager, "Alef-Regular.ttf");
     }
 
     @Override
@@ -24,7 +29,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ContactViewHolder>
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
         CardInfo ci = cardList.get(i);
         contactViewHolder.vTitle.setText(ci.title);
+        contactViewHolder.vTitle.setTypeface(alef);
         contactViewHolder.vContent.setText(ci.content);
+        contactViewHolder.vContent.setTypeface(alef);
     }
 
     @Override

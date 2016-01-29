@@ -1,6 +1,7 @@
 package olivegumball.bira;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -26,7 +27,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Typeface alef = Typeface.createFromAsset(this.getAssets(), "Alef-Regular.ttf");
+
         ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout)).setTitle("בירה");
+        ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout)).setCollapsedTitleTypeface(alef);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         List<CardInfo> cardInfo = Arrays.asList(new CardInfo("שלום", "אני אריאל המלך"), new CardInfo("זאת בדיקה", "אין אפס יותר מלב בעולם כולו"),  new CardInfo("עדן גאון", "תלמיד חכם מאד") );
-        mAdapter = new MyAdapter(cardInfo);
+        mAdapter = new MyAdapter(cardInfo, this.getAssets());
         mRecyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
