@@ -5,4 +5,5 @@
     <string name="settings_title">הגדרות</string>
     <string name="add_description">אתה נמצא כרגע ב:</string>
     <string name="settings_description">הוסף את מותגי הבירה האהובים עליך</string>
+    <string name="preference_file_key">olivegumball.bira.my_prefs</string>
 </resources>

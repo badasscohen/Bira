@@ -3,6 +3,7 @@ package olivegumball.bira;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -47,11 +48,25 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private String beers;
+    private String[] beer_array;
     private final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if(sharedPref.getInt("first", 1)==1){
+            Intent in = new Intent(this, SettingsActivity.class);
+            startActivity(in);
+            this.finish();
+        }
+        beers = sharedPref.getString("beers", "בקס");
+        beer_array = beers.split(",");
+
         setContentView(R.layout.activity_main);
 
         Typeface alef = Typeface.createFromAsset(this.getAssets(), "Alef-Regular.ttf");
@@ -187,6 +202,15 @@ public class MainActivity extends AppCompatActivity {
                                             } catch (UnsupportedEncodingException uee) {
                                                 //nofthing
                                                 beer = "";
+                                            }
+                                            int check = 0;
+                                            for(int x = 0; x < beer_array.length; x++){
+                                                if(beer.equals(beer_array[x])){
+                                                   check++;
+                                                }
+                                            }
+                                            if (check==0) {
+                                                continue;
                                             }
                                             if(beer.equals("קרלסברג")){
                                                 d = getDrawable(R.drawable.carlsberg);
