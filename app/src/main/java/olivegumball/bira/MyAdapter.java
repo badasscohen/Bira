@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
 
@@ -30,8 +31,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ContactViewHolder>
         CardInfo ci = cardList.get(i);
         contactViewHolder.vTitle.setText(ci.title);
         contactViewHolder.vTitle.setTypeface(alef);
-        contactViewHolder.vContent.setText(ci.content);
-        contactViewHolder.vContent.setTypeface(alef);
+        contactViewHolder.vDistance.setText(ci.distance);
+        contactViewHolder.vDistance.setTypeface(alef);
+        contactViewHolder.vPrice.setText(ci.price);
+        contactViewHolder.vPrice.setTypeface(alef);
+        contactViewHolder.vImage.setImageDrawable(ci.image);
     }
 
     @Override
@@ -45,12 +49,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ContactViewHolder>
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
         protected TextView vTitle;
-        protected TextView vContent;
+        protected TextView vDistance;
+        protected TextView vPrice;
+        protected ImageView vImage;
 
         public ContactViewHolder(View v) {
             super(v);
             vTitle =  (TextView) v.findViewById(R.id.card_title);
-            vContent = (TextView)  v.findViewById(R.id.card_content);
+            vDistance = (TextView)  v.findViewById(R.id.card_distance);
+            vPrice = (TextView) v.findViewById(R.id.card_price);
+            vImage = (ImageView) v.findViewById(R.id.card_image);
         }
     }
 }

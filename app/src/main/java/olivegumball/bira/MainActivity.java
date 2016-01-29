@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        List<CardInfo> cardInfo = Arrays.asList(new CardInfo("שלום", "אני אריאל המלך"), new CardInfo("זאת בדיקה", "אין אפס יותר מלב בעולם כולו"),  new CardInfo("עדן גאון", "תלמיד חכם מאד") );
+        List<CardInfo> cardInfo = Arrays.asList(new CardInfo("שלום", "אני אריאל המלך", "איזה יופי", getDrawable(R.drawable.big_beer)));
         mAdapter = new MyAdapter(cardInfo, this.getAssets());
         mRecyclerView.setAdapter(mAdapter);
 
