@@ -35,10 +35,12 @@ import org.w3c.dom.Text;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Locale;
 
@@ -79,8 +81,14 @@ public class AddActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
-                String url = "http://46.101.189.104/insert.php?beer="+beer_name.getText()+"&price="
-                        +beer_price.getText()+"&lat="+loc.getLatitude()+"&long="+loc.getLongitude();
+                String url;
+                try {
+                    url = "http://46.101.189.104/insert.php?beer=" + URLEncoder.encode(beer_name.getText().toString(), "UTF-8") + "&price="
+                            + beer_price.getText() + "&lat=" + loc.getLatitude() + "&long=" + loc.getLongitude();
+                } catch (UnsupportedEncodingException uee) {
+                    //nufin
+                    url = "";
+                }
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {

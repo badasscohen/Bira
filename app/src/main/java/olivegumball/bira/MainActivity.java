@@ -34,6 +34,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -179,28 +181,35 @@ public class MainActivity extends AppCompatActivity {
                                             DecimalFormat df = new DecimalFormat("#.#");
                                             String dist = df.format(dis);
                                             Drawable d;
-                                            if(((JSONObject) json.get(key)).getString("beer").equals("קרלסברג")){
+                                            String beer;
+                                            try {
+                                                beer = URLDecoder.decode(((JSONObject) json.get(key)).getString("beer"), "UTF-8");
+                                            } catch (UnsupportedEncodingException uee) {
+                                                //nofthing
+                                                beer = "";
+                                            }
+                                            if(beer.equals("קרלסברג")){
                                                 d = getDrawable(R.drawable.carlsberg);
-                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("בקס")) {
+                                            } else if(beer.equals("בקס")) {
                                                 d = getDrawable(R.drawable.becks);
-                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("קורונה")) {
+                                            } else if(beer.equals("קורונה")) {
                                                 d = getDrawable(R.drawable.corona);
-                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("גינס")) {
+                                            } else if(beer.equals("גינס")) {
                                                 d = getDrawable(R.drawable.guiness);
-                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("היינקן")) {
+                                            } else if(beer.equals("היינקן")) {
                                                 d = getDrawable(R.drawable.heiniken);
-                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("מרטנס פילס")) {
+                                            } else if(beer.equals("מרטנס פילס")) {
                                                 d = getDrawable(R.drawable.martens);
-                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("ניוקאסל")) {
+                                            } else if(beer.equals("ניוקאסל")) {
                                                 d = getDrawable(R.drawable.newcastle);
-                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("פאולנר")) {
+                                            } else if(beer.equals("פאולנר")) {
                                                 d = getDrawable(R.drawable.paulaner);
-                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("סאמואל אדאמס")) {
+                                            } else if(beer.equals("סאמואל אדאמס")) {
                                                 d = getDrawable(R.drawable.samadams);
                                             }else{
                                                 d = getDrawable(R.drawable.big_beer);
                                             }
-                                            cardInfo.add(new CardInfo(((JSONObject) json.get(key)).getString("beer"), dist+" ק\"מ", ((JSONObject) json.get(key)).getString("price")+" ש\"ח", d));
+                                            cardInfo.add(new CardInfo(beer, dist+" ק\"מ", ((JSONObject) json.get(key)).getString("price")+" ש\"ח", d));
                                         }
                                     }
                                     if (cardInfo.size() > 1){
