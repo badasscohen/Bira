@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -177,7 +178,29 @@ public class MainActivity extends AppCompatActivity {
                                             double dis = distance(location.getLatitude(), location.getLongitude(), ((JSONObject) json.get(key)).getDouble("lat"), ((JSONObject) json.get(key)).getDouble("long"));
                                             DecimalFormat df = new DecimalFormat("#.#");
                                             String dist = df.format(dis);
-                                            cardInfo.add(new CardInfo(((JSONObject) json.get(key)).getString("beer"), dist+" ק\"מ", ((JSONObject) json.get(key)).getString("price")+" ש\"ח", getDrawable(R.drawable.big_beer)));
+                                            Drawable d;
+                                            if(((JSONObject) json.get(key)).getString("beer").equals("קרלסברג")){
+                                                d = getDrawable(R.drawable.carlsberg);
+                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("בקס")) {
+                                                d = getDrawable(R.drawable.becks);
+                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("קורונה")) {
+                                                d = getDrawable(R.drawable.corona);
+                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("גינס")) {
+                                                d = getDrawable(R.drawable.guiness);
+                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("היינקן")) {
+                                                d = getDrawable(R.drawable.heiniken);
+                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("מרטנס פילס")) {
+                                                d = getDrawable(R.drawable.martens);
+                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("ניוקאסל")) {
+                                                d = getDrawable(R.drawable.newcastle);
+                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("פאולנר")) {
+                                                d = getDrawable(R.drawable.paulaner);
+                                            } else if(((JSONObject) json.get(key)).getString("beer").equals("סאמואל אדאמס")) {
+                                                d = getDrawable(R.drawable.samadams);
+                                            }else{
+                                                d = getDrawable(R.drawable.big_beer);
+                                            }
+                                            cardInfo.add(new CardInfo(((JSONObject) json.get(key)).getString("beer"), dist+" ק\"מ", ((JSONObject) json.get(key)).getString("price")+" ש\"ח", d));
                                         }
                                     }
                                     if (cardInfo.size() > 1){
