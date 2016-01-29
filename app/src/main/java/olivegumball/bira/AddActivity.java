@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -51,11 +52,14 @@ public class AddActivity extends AppCompatActivity{
     private EditText beer_price;
     private EditText beer_name;
     private Location loc = null;
+    private Typeface alef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        alef = Typeface.createFromAsset(this.getAssets(), "Alef-Regular.ttf");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,6 +69,10 @@ public class AddActivity extends AppCompatActivity{
         beer_price = (EditText) findViewById(R.id.beer_price);
         beer_name = (EditText) findViewById(R.id.beer_name);
         location_textview = (TextView) findViewById(R.id.location_field);
+
+        beer_price.setTypeface(alef);
+        beer_name.setTypeface(alef);
+        ((TextView) findViewById(R.id.you_are_at)).setTypeface(alef);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
