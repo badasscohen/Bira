@@ -50,6 +50,7 @@
             android:layout_gravity="center_vertical"
             android:singleLine="true"
             android:hint="@string/beer_name"
+            android:textColorHint="@android:color/white"
             android:textColor="@android:color/white"/>
 
     </LinearLayout>

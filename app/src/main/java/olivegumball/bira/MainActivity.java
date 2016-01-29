@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
                                     JSONObject tmp;
                                     int iterator = 0;
 
+                                    List<CardInfo> afterStuff = new LinkedList<CardInfo>();
                                     List<CardInfo> cardInfo = new LinkedList<CardInfo>(Arrays.asList(new CardInfo("אין תוצאות!", "", "", getDrawable(R.drawable.big_beer), 0, 0)));
                                     Iterator<String> keys = json.keys();
                                     while(keys.hasNext()){
@@ -210,9 +211,6 @@ public class MainActivity extends AppCompatActivity {
                                                    check++;
                                                 }
                                             }
-                                            if (check==0) {
-                                                continue;
-                                            }
                                             if(beer.equals("קרלסברג")){
                                                 d = getDrawable(R.drawable.carlsberg);
                                             } else if(beer.equals("בקס")) {
@@ -234,12 +232,17 @@ public class MainActivity extends AppCompatActivity {
                                             }else{
                                                 d = getDrawable(R.drawable.big_beer);
                                             }
+                                            if (check==0) {
+                                                afterStuff.add(new CardInfo(beer, dist+" ק\"מ", ((JSONObject) json.get(key)).getString("price")+" ש\"ח", d, ((JSONObject) json.get(key)).getDouble("lat"), ((JSONObject) json.get(key)).getDouble("long")));
+                                                continue;
+                                            }
                                             cardInfo.add(new CardInfo(beer, dist+" ק\"מ", ((JSONObject) json.get(key)).getString("price")+" ש\"ח", d, ((JSONObject) json.get(key)).getDouble("lat"), ((JSONObject) json.get(key)).getDouble("long")));
                                         }
                                     }
                                     if (cardInfo.size() > 1){
                                         cardInfo.remove(0);
                                     }
+                                    cardInfo.addAll(afterStuff);
                                     mAdapter = new MyAdapter(cardInfo, MainActivity.this.getAssets());
                                     mRecyclerView.setAdapter(mAdapter);
                                 } catch (JSONException je){
