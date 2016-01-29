@@ -39,6 +39,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        List<CardInfo> cardInfo = Arrays.asList(new CardInfo("טוען תוצאות...", "", "", getDrawable(R.drawable.big_beer)));
+        List<CardInfo> cardInfo = Arrays.asList(new CardInfo("טוען תוצאות...", "", "", getDrawable(R.drawable.big_beer),0,0));
         mAdapter = new MyAdapter(cardInfo, MainActivity.this.getAssets());
         mRecyclerView.setAdapter(mAdapter);
 
@@ -187,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                                     JSONObject tmp;
                                     int iterator = 0;
 
-                                    List<CardInfo> cardInfo = new LinkedList<CardInfo>(Arrays.asList(new CardInfo("אין תוצאות!", "", "", getDrawable(R.drawable.big_beer))));
+                                    List<CardInfo> cardInfo = new LinkedList<CardInfo>(Arrays.asList(new CardInfo("אין תוצאות!", "", "", getDrawable(R.drawable.big_beer), 0, 0)));
                                     Iterator<String> keys = json.keys();
                                     while(keys.hasNext()){
                                         String key = (String)keys.next();
@@ -233,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                                             }else{
                                                 d = getDrawable(R.drawable.big_beer);
                                             }
-                                            cardInfo.add(new CardInfo(beer, dist+" ק\"מ", ((JSONObject) json.get(key)).getString("price")+" ש\"ח", d));
+                                            cardInfo.add(new CardInfo(beer, dist+" ק\"מ", ((JSONObject) json.get(key)).getString("price")+" ש\"ח", d, ((JSONObject) json.get(key)).getDouble("lat"), ((JSONObject) json.get(key)).getDouble("long")));
                                         }
                                     }
                                     if (cardInfo.size() > 1){

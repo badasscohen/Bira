@@ -3,7 +3,9 @@
     <string name="action_settings">הגדרות</string>
     <string name="add_title">הוספה</string>
     <string name="settings_title">הגדרות</string>
-    <string name="add_description">אתה נמצא כרגע ב:</string>
+    <string name="add_description">הזן מותג בירה ואת המחיר שלו:</string>
     <string name="settings_description">הוסף את מותגי הבירה האהובים עליך</string>
+    <string name="beer_price">0.00</string>
+    <string name="beer_name">מותג הבירה</string>
     <string name="preference_file_key">olivegumball.bira.my_prefs</string>
 </resources>

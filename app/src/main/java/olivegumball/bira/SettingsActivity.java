@@ -55,7 +55,7 @@ public class SettingsActivity extends Activity {
             public void onClick(View view) {
                 if(beers.length() > 0) {
                     editor.putInt("first", 0);
-                    editor.putString("beers", beers.substring(0, beers.length() - 2));
+                    editor.putString("beers", beers.substring(0, beers.length() - 1));
                     editor.commit();
                     Intent i = new Intent(SettingsActivity.this, MainActivity.class);
                     startActivity(i);

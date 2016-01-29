@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,7 +26,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="112dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical">
 
@@ -37,30 +38,26 @@
             android:layout_gravity="right"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
-        <TextView
-            android:id="@+id/location_field"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="28dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/beer_price"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:numeric="decimal"
+                android:hint="@string/beer_price"/>
 
             <EditText
                 android:id="@+id/beer_name"
                 android:layout_weight="3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/beer_name"/>
 
         </LinearLayout>
 

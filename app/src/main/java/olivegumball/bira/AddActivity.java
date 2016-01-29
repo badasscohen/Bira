@@ -13,7 +13,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -50,7 +52,6 @@ import java.util.Locale;
 public class AddActivity extends AppCompatActivity{
 
     private final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 5;
-    private TextView location_textview;
     private EditText beer_price;
     private EditText beer_name;
     private Location loc = null;
@@ -70,7 +71,6 @@ public class AddActivity extends AppCompatActivity{
 
         beer_price = (EditText) findViewById(R.id.beer_price);
         beer_name = (EditText) findViewById(R.id.beer_name);
-        location_textview = (TextView) findViewById(R.id.location_field);
 
         beer_price.setTypeface(alef);
         beer_name.setTypeface(alef);
@@ -80,33 +80,39 @@ public class AddActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
-                String url;
-                try {
-                    url = "http://46.101.189.104/insert.php?beer=" + URLEncoder.encode(beer_name.getText().toString(), "UTF-8") + "&price="
-                            + beer_price.getText() + "&lat=" + loc.getLatitude() + "&long=" + loc.getLongitude();
-                } catch (UnsupportedEncodingException uee) {
-                    //nufin
-                    url = "";
-                }
-
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // Display the first 500 characters of the response string.
-                                //SUCCESS!
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //SHIT
+                if(loc != null) {
+                    RequestQueue queue = Volley.newRequestQueue(AddActivity.this);
+                    String url;
+                    try {
+                        url = "http://46.101.189.104/insert.php?beer=" + URLEncoder.encode(beer_name.getText().toString(), "UTF-8") + "&price="
+                                + beer_price.getText() + "&lat=" + loc.getLatitude() + "&long=" + loc.getLongitude();
+                    } catch (UnsupportedEncodingException uee) {
+                        //nufin
+                        url = "";
                     }
-                });
-                // Add the request to the RequestQueue.
-                queue.add(stringRequest);
 
-                AddActivity.this.finish();
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    //SUCCESS!
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //SHIT
+                        }
+                    });
+                    // Add the request to the RequestQueue.
+                    queue.add(stringRequest);
+
+                    AddActivity.this.finish();
+                }else{
+                    Snackbar snackbar = Snackbar
+                            .make((CoordinatorLayout) findViewById(R.id.coordinator), "אנא חכה עד לקבלת מיקום גיאוגרפי", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         });
 
@@ -167,8 +173,6 @@ public class AddActivity extends AppCompatActivity{
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 loc = location;
-                location_textview.setText(getAddressForLocation(location));
-
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -180,39 +184,6 @@ public class AddActivity extends AppCompatActivity{
 
         // Register the listener with the Location Manager to receive location updates
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-    }
-
-    public String getAddressForLocation(Location location) {
-
-        if (location == null) {
-            return null;
-        }
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-        int maxResults = 1;
-
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(this, Locale.getDefault());
-
-
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
-        } catch(IOException ioe) {
-            addresses = null;
-        }
-
-        String knownName = addresses.get(0).getFeatureName();
-        if (knownName == null) {
-            String address = addresses.get(0).getAddressLine(0);
-            return address;
-        }
-        else{
-            return knownName;
-        }
-
-
-
     }
 }
 
