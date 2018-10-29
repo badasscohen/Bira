@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         List<CardInfo> cardInfo = Arrays.asList(new CardInfo("טוען תוצאות...", "", "", getDrawable(R.drawable.big_beer),0,0));
         mAdapter = new MyAdapter(cardInfo, MainActivity.this.getAssets());
         mRecyclerView.setAdapter(mAdapter);
-
+        
+        //Is this condition really necessary?
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
